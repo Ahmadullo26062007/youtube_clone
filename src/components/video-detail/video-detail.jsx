@@ -5,6 +5,7 @@ import { Avatar, Box, Chip, Stack, Typography } from "@mui/material";
 import ReactPlayer from "react-player";
 import {
   CheckCircle,
+  FavoriteOutlined,
   MarkChatRead,
   Tag,
   Visibility,
@@ -69,11 +70,23 @@ const VideoDetail = () => {
               alignItems={"center"}
               gap={"3px"}
             >
-              <Visibility />
+              <FavoriteOutlined />
               {parseInt(
-                videoDetail?.statistics?.liceCount
+                videoDetail?.statistics?.likeCount
               ).toLocaleString()}{" "}
               Likes
+            </Stack>
+             <Stack
+              sx={{ opacity: ".7" }}
+              direction={"row"}
+              alignItems={"center"}
+              gap={"3px"}
+            >
+              <Visibility />
+              {parseInt(
+                videoDetail?.statistics?.viewCount
+              ).toLocaleString()}{" "}
+              Views
             </Stack>
             <Stack
               sx={{ opacity: ".7" }}
