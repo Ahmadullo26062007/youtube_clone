@@ -3,6 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import { ApiService } from "../../service/api.service";
 import { Avatar, Box, Chip, Stack, Typography } from "@mui/material";
 import ReactPlayer from "react-player";
+import Linkify from "react-linkify";
 import {
   CheckCircle,
   FavoriteOutlined,
@@ -10,7 +11,6 @@ import {
   Tag,
   Visibility,
 } from "@mui/icons-material";
-import renderHTML from "react-render-html";
 import { Loader, Videos } from "../";
 const VideoDetail = () => {
   const [videoDetail, setVideoDetail] = useState(null);
@@ -61,7 +61,23 @@ const VideoDetail = () => {
             {videoDetail?.snippet?.title}
           </Typography>
           <Typography variant="subtitle2" p={2} sx={{ opacity: ".7" }}>
-            {renderHTML(videoDetail?.snippet?.description)}
+            <Linkify
+              componentDecorator={(decoratedHref, decoratedText, key) => (
+                <a
+                  href={decoratedHref}
+                  key={key}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ color: "blue", textDecoration: "underline" }}
+                >
+                  {decoratedText}
+                </a>
+              )}
+            >
+              <pre style={{ whiteSpace: "pre-wrap",letterSpacing: "-1px" }}>
+                {videoDetail?.snippet?.description}
+              </pre>
+            </Linkify>
           </Typography>
           <Stack direction="row" gap="20px" alignItems="center" py={1} px={2}>
             <Stack
